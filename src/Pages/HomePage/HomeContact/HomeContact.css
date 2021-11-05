@@ -1,0 +1,19 @@
+.home-contact {
+  padding: 5% 0 6%;
+  background-image: url("../../../images/appointment-bg.png");
+  background-color: rgb(51, 48, 48);
+  background-blend-mode: multiply;
+}
+.home-contact .form {
+  width: 50%;
+  margin: auto;
+}
+.home-contact .form-item {
+  width: 100%;
+}
+@media screen and (max-width: 767px) {
+  .home-contact .form {
+    width: 80%;
+    margin: auto;
+  }
+}

@@ -1,0 +1,42 @@
+.second {
+  margin-top: -60px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.open {
+  display: flex;
+  align-items: center;
+  padding: 25px;
+  border-radius: 10px;
+  background-color: #12d0d5;
+}
+.open i {
+  font-size: 50px;
+  color: white;
+}
+.location {
+  background-color: #153c57;
+}
+
+@media screen and (max-width: 991px) {
+  .second {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+  }
+  .open {
+    width: 60%;
+    margin: auto;
+  }
+}
+@media screen and (max-width: 767px) {
+  .second {
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+  .open {
+    width: 90%;
+    margin: auto;
+  }
+}

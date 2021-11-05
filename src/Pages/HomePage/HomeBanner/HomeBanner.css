@@ -1,0 +1,9 @@
+.bannerBtn {
+  background-color: transparent;
+  border: 2px solid #24343f;
+}
+.bannerBtn:hover {
+  background-color: #24343f;
+  color: white;
+  border: 2px solid transparent;
+}

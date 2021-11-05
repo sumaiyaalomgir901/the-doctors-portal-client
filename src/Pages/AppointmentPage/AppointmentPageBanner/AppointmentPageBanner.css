@@ -1,0 +1,27 @@
+.appointment-page {
+  background-color: rgb(228, 227, 227);
+  background-image: url("../../../images/chair.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: soft-light;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+.appointment-page img {
+  width: 75%;
+}
+.appointment-page .css-4l7j15 {
+  width: 200px;
+  height: 300px;
+}
+@media screen and (max-width: 991px) {
+  .appointment-page img {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 767px) {
+  .appointment-page img {
+    width: 100%;
+    margin-top: 5%;
+  }
+}

@@ -1,0 +1,23 @@
+.service {
+  width: 32%;
+  padding: 2% 1%;
+  border: none;
+}
+.card-img {
+  width: 55px;
+  margin: auto;
+}
+@media screen and (max-width: 991px) {
+  .service {
+    width: 45%;
+    padding: 2% 1%;
+    border: none;
+  }
+}
+@media screen and (max-width: 575px) {
+  .service {
+    width: 90%;
+    padding: 2% 1%;
+    border: none;
+  }
+}

@@ -1,0 +1,38 @@
+.exception {
+  display: flex;
+  align-items: center;
+  padding-bottom: 5%;
+}
+.left img {
+  width: 80%;
+}
+.right {
+  text-align: left;
+}
+.right p {
+  padding-right: 10%;
+  margin: 4% 0 6%;
+}
+.exception-btn {
+  background-color: #12d0d5;
+  border: none;
+  padding: 8px 18px;
+  color: white;
+}
+@media screen and (max-width: 991px) {
+  .left img {
+    width: 100%;
+  }
+  .right p {
+    padding-right: 0%;
+  }
+}
+@media screen and (max-width: 767px) {
+  .left img {
+    width: 70%;
+  }
+  .right {
+    text-align: center;
+    margin-top: 3%;
+  }
+}

@@ -1,0 +1,30 @@
+.appointment {
+  padding: 5% 0;
+}
+.apppoint-img {
+  width: 85%;
+}
+.appointment-details {
+  padding: 4% 1%;
+  text-align: left;
+}
+.appointment-details p {
+  padding-right: 15%;
+}
+@media screen and (max-width: 991px) {
+  .apppoint-img {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 767px) {
+  .apppoint-img {
+    width: 40%;
+  }
+  .appointment-details {
+    text-align: center;
+    padding-top: 5%;
+  }
+  .appointment-details p {
+    padding-right: 0;
+  }
+}
