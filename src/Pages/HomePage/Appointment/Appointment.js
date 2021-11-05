@@ -1,6 +1,7 @@
 import Button from "@restart/ui/esm/Button";
 import React from "react";
 import { Col, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import lady from "../../../images/doctor1.png";
 import "./Appointment.css";
 
@@ -25,9 +26,11 @@ const Appointment = () => {
               privilege & responsibility. For over 10 years, my team & I have
               proudly provided the best dental experience in Bangladesh.
             </p>
-            <Button className="exception-btn fw-bold rounded">
-              GET APPOINTMENT
-            </Button>
+            <Link to="/appointment">
+              <Button className="exception-btn fw-bold rounded">
+                GET APPOINTMENT
+              </Button>
+            </Link>
           </Col>
         </Row>
       </div>
