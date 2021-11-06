@@ -10,10 +10,24 @@
 .appointment-page img {
   width: 75%;
 }
-.appointment-page .css-4l7j15 {
+
+/* .appointment-page .css-4l7j15 .css-1xhj18k {
   width: 200px;
-  height: 300px;
+  min-width: 280px;
 }
+.appointment-page .css-4l7j15 .css-1xhj18k .css-epd502 {
+  width: 200px;
+  min-width: 280px;
+}
+.appointment-page
+  .css-4l7j15
+  .css-1xhj18k
+  .css-epd502
+  .css-169iwlq-MuiCalendarPicker-root {
+  width: 200px;
+  min-width: 280px;
+} */
+/* ======================== */
 @media screen and (max-width: 991px) {
   .appointment-page img {
     width: 100%;
@@ -22,6 +36,32 @@
 @media screen and (max-width: 767px) {
   .appointment-page img {
     width: 100%;
-    margin-top: 5%;
+    margin-top: 6%;
   }
 }
+
+@media screen and (min-width: 280px) and (max-width: 350px) {
+  .appointment-page .css-4l7j15 {
+    width: 280px !important;
+    min-width: 280px !important;
+    max-height: 320px;
+  }
+  .appointment-page .css-4l7j15 .css-1xhj18k {
+    width: 280px !important;
+    min-width: 280px !important;
+    max-height: 320px;
+  }
+  .css-4l7j15 .css-1xhj18k .css-epd502 {
+    width: 280px !important;
+    min-width: 280px !important;
+    max-height: 320px;
+  }
+
+  .css-4l7j15 .css-1xhj18k .css-epd502 .css-169iwlq-MuiCalendarPicker-root {
+    width: 280px !important;
+    min-width: 280px !important;
+    max-height: 320px;
+  }
+}
+/* .css-1xhj18k
+.css-epd502 */

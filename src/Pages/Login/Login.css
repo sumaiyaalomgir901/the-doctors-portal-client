@@ -1,0 +1,9 @@
+.form {
+  width: 55%;
+  margin: 30px auto 0px;
+}
+@media screen and (max-width: 991px) {
+  .form {
+    width: 90%;
+  }
+}

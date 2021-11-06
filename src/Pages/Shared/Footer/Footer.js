@@ -1,6 +1,5 @@
-import Button from "@restart/ui/esm/Button";
 import React from "react";
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Button } from "react-bootstrap";
 import "./Footer.css";
 
 const Footer = () => {

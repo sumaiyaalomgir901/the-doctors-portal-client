@@ -17,8 +17,14 @@
 .exception-btn {
   background-color: #12d0d5;
   border: none;
-  padding: 8px 18px;
+  padding: 7px 15px;
   color: white;
+  border: 2px solid transparent;
+}
+.exception-btn:hover {
+  color: #12d0d5;
+  background-color: transparent;
+  border: 2px solid #12d0d5;
 }
 @media screen and (max-width: 991px) {
   .left img {

@@ -1,6 +1,5 @@
-import Button from "@restart/ui/esm/Button";
 import React from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row, Button } from "react-bootstrap";
 import chair from "../../../images/chair.png";
 import bg from "../../../images/banner.png";
 import "./HomeBanner.css";

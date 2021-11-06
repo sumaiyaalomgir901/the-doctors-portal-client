@@ -2,7 +2,7 @@ import React from "react";
 import Navigation from "../../Shared/Navigation/Navigation";
 import Appointment from "../Appointment/Appointment";
 import Exception from "../Exception/Exception";
-import Footer from "../Footer/Footer";
+import Footer from "../../Shared/Footer/Footer";
 import HomeBanner from "../HomeBanner/HomeBanner";
 import HomeContact from "../HomeContact/HomeContact";
 import Information from "../Information/Information";
