@@ -1,9 +1,11 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
+import useAuth from "../../../Hooks/useAuth";
 import "./BookingModal.css";
 
 const BookingModal = ({ bookingModal, handleBookingClose, book, date }) => {
   const { name, time, space } = book;
+  const { user } = useAuth();
   return (
     <>
       <Modal show={bookingModal} onHide={handleBookingClose} animation={false}>
@@ -30,13 +32,7 @@ const BookingModal = ({ bookingModal, handleBookingClose, book, date }) => {
               className="form-control mb-3 border-0 py-2"
               style={{ backgroundColor: "#EEEEEF" }}
               placeholder="Your Name"
-            />
-            <input
-              type="number"
-              name="number"
-              className="form-control mb-3 border-0 py-2"
-              style={{ backgroundColor: "#EEEEEF" }}
-              placeholder="Your Number"
+              value={user.displayName}
             />
             <input
               type="email"
@@ -44,6 +40,14 @@ const BookingModal = ({ bookingModal, handleBookingClose, book, date }) => {
               className="form-control mb-3 border-0 py-2"
               style={{ backgroundColor: "#EEEEEF" }}
               placeholder="Your Email"
+              value={user.email}
+            />
+            <input
+              type="text"
+              name="number"
+              className="form-control mb-3 border-0 py-2"
+              style={{ backgroundColor: "#EEEEEF" }}
+              placeholder="Your Number"
             />
             <input
               disabled

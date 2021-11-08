@@ -1,12 +1,78 @@
-import React from "react";
-import { Col, Row, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Col, Row, Button, Spinner } from "react-bootstrap";
+import { Link, useHistory, useLocation } from "react-router-dom";
+import Swal from "sweetalert2";
+import useAuth from "../../Hooks/useAuth";
 import welcome from "../../images/welcome.jpg";
+import Navigation from "../Shared/Navigation/Navigation";
 
 const Register = () => {
+  const [loginData, setLoginData] = useState({});
+  const { user, error, handleRegister, handleGoogleSignIn, isLoading } =
+    useAuth();
+
+  const history = useHistory();
+  const location = useLocation();
+
+  const handleOnChange = (e) => {
+    const field = e.target.name;
+    const value = e.target.value;
+
+    const newData = { ...loginData };
+    newData[field] = value;
+    setLoginData(newData);
+  };
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+
+    const namereg = document.getElementById("name_reg").value.length;
+    const emailreg = document.getElementById("email_reg").value.length;
+    const passwordreg = document.getElementById("pass_reg").value.length;
+    const repasswordreg = document.getElementById("pass2_reg").value.length;
+
+    if (
+      namereg === 0 ||
+      emailreg === 0 ||
+      passwordreg === 0 ||
+      repasswordreg === 0
+    ) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Field must not be empty",
+      });
+    } else if (loginData.password !== loginData.password2) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Password not matched!",
+      });
+    } else if (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error,
+      });
+    } else {
+      handleRegister(
+        loginData.name,
+        loginData.email,
+        loginData.password,
+        history
+      );
+    }
+  };
+  //google
+  const signInWithGoogle = (e) => {
+    e.preventDefault();
+    handleGoogleSignIn(history, location);
+  };
+
   return (
     <div>
-      <div className="container border ">
+      <Navigation></Navigation>
+      <div className="container">
         <Row className=" mt-4 justify-content-center">
           <Col xs={12} sm={12} md={8} lg={8}>
             <div>
@@ -16,8 +82,10 @@ const Register = () => {
           <Col className="mt-4" xs={12} sm={12} md={8} lg={8}>
             <h3>Please Register</h3>
             <div className="form">
-              <form>
+              <form onSubmit={handleOnSubmit}>
                 <input
+                  onChange={handleOnChange}
+                  id="name_reg"
                   className="w-100 mb-3 py-2 ps-3 rounded border-bottom-0 border-top-0 border-end-0"
                   style={{
                     backgroundColor: "#EEEEEF",
@@ -28,6 +96,8 @@ const Register = () => {
                   name="name"
                 />
                 <input
+                  onChange={handleOnChange}
+                  id="email_reg"
                   className="w-100 mb-3 py-2 ps-3 rounded border-bottom-0 border-top-0 border-end-0"
                   style={{
                     backgroundColor: "#EEEEEF",
@@ -38,6 +108,8 @@ const Register = () => {
                   name="email"
                 />
                 <input
+                  onChange={handleOnChange}
+                  id="pass_reg"
                   className="w-100 mb-3 py-2 ps-3 rounded border-bottom-0 border-top-0 border-end-0"
                   style={{
                     backgroundColor: "#EEEEEF",
@@ -48,17 +120,37 @@ const Register = () => {
                   name="password"
                 />
                 <input
+                  onChange={handleOnChange}
+                  id="pass2_reg"
+                  className="w-100 mb-3 py-2 ps-3 rounded border-bottom-0 border-top-0 border-end-0"
+                  style={{
+                    backgroundColor: "#EEEEEF",
+                    borderLeft: "2px solid #12d0d5",
+                  }}
+                  placeholder="Retype your password"
+                  type="password"
+                  name="password2"
+                />
+                <input
                   className="exception-btn  w-50 fw-bold rounded mb-2"
                   type="submit"
                   value="Register"
                 />
               </form>
+
+              {/* {isLoading && (
+                <Spinner animation="border" role="status"></Spinner>
+              )} */}
+
               <p>OR</p>
-              <Link>
-                <Button className="exception-btn w-50 fw-bold rounded mb-3">
-                  Google Sign In
-                </Button>
-              </Link>
+
+              <Button
+                onClick={signInWithGoogle}
+                className="exception-btn w-50 fw-bold rounded mb-3"
+              >
+                Google Sign In
+              </Button>
+
               <Link
                 to="/login"
                 style={{ textDecoration: "none", color: "#12d0d5" }}

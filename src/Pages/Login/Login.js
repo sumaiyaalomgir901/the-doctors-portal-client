@@ -1,13 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import { Col, Row, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import ".//Login.css";
 import welcome from "../../images/welcome.jpg";
+import Navigation from "../Shared/Navigation/Navigation";
+import useAuth from "../../Hooks/useAuth";
 
 const Login = () => {
+  const [loginData, setLoginData] = useState({});
+  const { handleLogin, handleGoogleSignIn } = useAuth();
+
+  const history = useHistory();
+  const location = useLocation();
+
+  const handleOnChange = (e) => {
+    e.preventDefault();
+    const field = e.target.name;
+    const value = e.target.value;
+
+    const newData = { ...loginData };
+    newData[field] = value;
+    setLoginData(newData);
+    console.log(newData);
+  };
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    handleLogin(loginData.email, loginData.password, history, location);
+  };
+  //==============google
+  const signInWithGoogle = (e) => {
+    e.preventDefault();
+    handleGoogleSignIn(history, location);
+  };
+
   return (
     <div>
-      <div className="container border ">
+      <Navigation></Navigation>
+      <div className="container">
         <Row className=" mt-4 justify-content-center">
           <Col xs={12} sm={12} md={8} lg={8}>
             <div>
@@ -17,8 +47,9 @@ const Login = () => {
           <Col className="mt-4" xs={12} sm={12} md={8} lg={8}>
             <h3>Please Login</h3>
             <div className="form">
-              <form>
+              <form onSubmit={handleOnSubmit}>
                 <input
+                  onChange={handleOnChange}
                   className="w-100 mb-3 py-2 ps-3 rounded border-bottom-0 border-top-0 border-end-0"
                   style={{
                     backgroundColor: "#EEEEEF",
@@ -29,6 +60,7 @@ const Login = () => {
                   name="email"
                 />
                 <input
+                  onChange={handleOnChange}
                   className="w-100 mb-3 py-2 ps-3 rounded border-bottom-0 border-top-0 border-end-0"
                   style={{
                     backgroundColor: "#EEEEEF",
@@ -46,7 +78,10 @@ const Login = () => {
               </form>
               <p>OR</p>
               <Link>
-                <Button className="exception-btn w-75 fw-bold rounded mb-3">
+                <Button
+                  onClick={signInWithGoogle}
+                  className="exception-btn w-75 fw-bold rounded mb-3"
+                >
                   Google Sign In
                 </Button>
               </Link>
