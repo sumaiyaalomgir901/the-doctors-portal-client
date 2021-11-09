@@ -100,9 +100,3 @@ const Login = () => {
 };
 
 export default Login;
-{
-  /* <h3>login page</h3>
-        <Link to="/register">
-          <Button>register</Button>
-        </Link> */
-}

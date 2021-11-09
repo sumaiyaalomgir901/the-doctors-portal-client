@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Col, Row, Button, Spinner } from "react-bootstrap";
+import { Col, Row, Button } from "react-bootstrap";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../Hooks/useAuth";
@@ -8,8 +8,7 @@ import Navigation from "../Shared/Navigation/Navigation";
 
 const Register = () => {
   const [loginData, setLoginData] = useState({});
-  const { user, error, handleRegister, handleGoogleSignIn, isLoading } =
-    useAuth();
+  const { error, handleRegister, handleGoogleSignIn } = useAuth();
 
   const history = useHistory();
   const location = useLocation();

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import {
   getAuth,
@@ -7,7 +7,6 @@ import {
   onAuthStateChanged,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  updateProfile,
   signOut,
 } from "firebase/auth";
 import firebaseInitialize from "../Firebase/Firebase.init";
@@ -17,7 +16,7 @@ import Swal from "sweetalert2";
 firebaseInitialize();
 
 const useFirebase = () => {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState([]);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
@@ -33,6 +32,7 @@ const useFirebase = () => {
       .then((result) => {
         const user = result.user;
         setUser(user);
+        // console.log("user", user);
         const destination = location?.state?.from || "/home";
         history.replace(destination);
       })
@@ -49,7 +49,7 @@ const useFirebase = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         setUser(user);
-        console.log(user);
+
         Swal.fire("Successfully!", "", "success");
       })
       .catch((error) => {
@@ -122,7 +122,7 @@ const useFirebase = () => {
       .then(() => {
         setUser({});
 
-        Swal.fire("Successfully Logout", "Thank you !", "success");
+        Swal.fire("Successfully Logout", "See you again.", "success");
       })
       .catch((error) => {
         setError(error.message);

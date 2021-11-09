@@ -3,7 +3,7 @@ import { Card } from "react-bootstrap";
 import "./Service.css";
 
 const Service = (props) => {
-  const { name, id, description, image } = props.service;
+  const { name, description, image } = props.service;
   return (
     <Card className="service">
       <Card.Img className="card-img" variant="top" src={image} />

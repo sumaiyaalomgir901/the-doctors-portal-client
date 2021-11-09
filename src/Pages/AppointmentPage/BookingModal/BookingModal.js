@@ -1,11 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
+import Swal from "sweetalert2";
 import useAuth from "../../../Hooks/useAuth";
 import "./BookingModal.css";
 
 const BookingModal = ({ bookingModal, handleBookingClose, book, date }) => {
-  const { name, time, space } = book;
+  const { name, time } = book;
   const { user } = useAuth();
+  const initialBookingInfo = {
+    patientName: user.displayName,
+    patientEmail: user.email,
+    patientNumber: user.phone,
+  };
+  const [bookingInfo, setBookingInfo] = useState(initialBookingInfo);
+
+  const handleOnBlurBook = (e) => {
+    const field = e.target.name;
+    const value = e.target.value;
+    const newBookInfo = { ...bookingInfo };
+    newBookInfo[field] = value;
+    setBookingInfo(newBookInfo);
+  };
+
+  const handleOnSubmitBook = (e) => {
+    e.preventDefault();
+    const appointment = {
+      ...bookingInfo,
+      serviceName: name,
+      time: time,
+      date: date.toDateString(),
+    };
+
+    fetch("http://localhost:5000/appointments", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(appointment),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Data:", data);
+        if (data.insertedId) {
+          Swal.fire("Successfully", "Booked an appointment.", "success");
+          handleBookingClose();
+        }
+      });
+  };
+
   return (
     <>
       <Modal show={bookingModal} onHide={handleBookingClose} animation={false}>
@@ -17,52 +59,53 @@ const BookingModal = ({ bookingModal, handleBookingClose, book, date }) => {
           >
             {name}
           </Modal.Title>
-          <form>
+          <form onSubmit={handleOnSubmitBook}>
             <input
               disabled
               type="text"
               className="form-control mb-3 border-0 py-2"
               style={{ backgroundColor: "#EEEEEF" }}
-              placeholder={time}
+              value={time}
             />
 
             <input
               type="name"
-              name="name"
+              name="patientName"
+              onBlur={handleOnBlurBook}
               className="form-control mb-3 border-0 py-2"
               style={{ backgroundColor: "#EEEEEF" }}
-              placeholder="Your Name"
-              value={user.displayName}
+              defaultValue={user.displayName}
             />
             <input
               type="email"
-              name="email"
+              name="patientEmail"
+              onBlur={handleOnBlurBook}
               className="form-control mb-3 border-0 py-2"
               style={{ backgroundColor: "#EEEEEF" }}
-              placeholder="Your Email"
-              value={user.email}
+              defaultValue={user.email}
             />
             <input
               type="text"
-              name="number"
+              name="patientNumber"
+              onBlur={handleOnBlurBook}
               className="form-control mb-3 border-0 py-2"
               style={{ backgroundColor: "#EEEEEF" }}
               placeholder="Your Number"
             />
             <input
               disabled
-              type="email"
-              name="email"
               className="form-control mb-3 border-0 py-2"
               style={{ backgroundColor: "#EEEEEF" }}
-              placeholder={date.toDateString()}
+              value={date.toDateString()}
+            />
+            <input
+              type="submit"
+              value="Book"
+              className="exception-btn w-25 fw-bold rounded"
             />
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button className="exception-btn fw-bold rounded" variant="secondary">
-            BOOK
-          </Button>
           <Button
             className="exception-btn fw-bold rounded"
             variant="secondary"

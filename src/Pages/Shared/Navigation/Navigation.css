@@ -1,0 +1,8 @@
+.offcanvas {
+  width: 280px;
+}
+.offcanvas-header {
+  justify-content: space-between;
+  align-items: normal;
+  margin-top: 20px;
+}
