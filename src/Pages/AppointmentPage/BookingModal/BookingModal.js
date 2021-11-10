@@ -12,6 +12,7 @@ const BookingModal = ({ bookingModal, handleBookingClose, book, date }) => {
     patientEmail: user.email,
     patientNumber: user.phone,
   };
+
   const [bookingInfo, setBookingInfo] = useState(initialBookingInfo);
 
   const handleOnBlurBook = (e) => {
