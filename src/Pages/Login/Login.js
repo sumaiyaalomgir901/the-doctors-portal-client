@@ -24,7 +24,7 @@ const Login = () => {
     console.log(newData);
   };
 
-  const handleOnSubmit = (e) => {
+  const handleLoginSubmit = (e) => {
     e.preventDefault();
     handleLogin(loginData.email, loginData.password, history, location);
   };
@@ -47,10 +47,10 @@ const Login = () => {
           <Col className="mt-4" xs={12} sm={12} md={8} lg={8}>
             <h3>Please Login</h3>
             <div className="form">
-              <form onSubmit={handleOnSubmit}>
+              <form onSubmit={handleLoginSubmit}>
                 <input
                   onChange={handleOnChange}
-                  className="w-100 mb-3 py-2 ps-3 rounded border-bottom-0 border-top-0 border-end-0"
+                  className="w-75 mb-3 py-2 ps-3 rounded border-bottom-0 border-top-0 border-end-0"
                   style={{
                     backgroundColor: "#EEEEEF",
                     borderLeft: "2px solid #12d0d5",
@@ -61,7 +61,7 @@ const Login = () => {
                 />
                 <input
                   onChange={handleOnChange}
-                  className="w-100 mb-3 py-2 ps-3 rounded border-bottom-0 border-top-0 border-end-0"
+                  className="w-75 mb-3 py-2 ps-3 rounded border-bottom-0 border-top-0 border-end-0"
                   style={{
                     backgroundColor: "#EEEEEF",
                     borderLeft: "2px solid #12d0d5",
@@ -71,7 +71,7 @@ const Login = () => {
                   name="password"
                 />
                 <input
-                  className="exception-btn  w-75 fw-bold rounded mb-2"
+                  className="exception-btn  w-50 fw-bold rounded mb-2"
                   type="submit"
                   value="Login"
                 />
@@ -80,7 +80,7 @@ const Login = () => {
               <Link>
                 <Button
                   onClick={signInWithGoogle}
-                  className="exception-btn w-75 fw-bold rounded mb-3"
+                  className="exception-btn w-50 fw-bold rounded mb-3"
                 >
                   Google Sign In
                 </Button>

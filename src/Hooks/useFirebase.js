@@ -5,8 +5,9 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   onAuthStateChanged,
-  createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  updateProfile,
   signOut,
 } from "firebase/auth";
 import firebaseInitialize from "../Firebase/Firebase.init";
@@ -19,6 +20,7 @@ const useFirebase = () => {
   const [user, setUser] = useState([]);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [admin, setAdmin] = useState(false);
 
   const auth = getAuth();
 
@@ -32,6 +34,7 @@ const useFirebase = () => {
       .then((result) => {
         const user = result.user;
         setUser(user);
+        saveUserGoogle(user.email, user.displayName);
         // console.log("user", user);
         const destination = location?.state?.from || "/home";
         history.replace(destination);
@@ -42,47 +45,33 @@ const useFirebase = () => {
       .finally(() => setIsLoading(false));
   };
 
-  // ======================== User  Register
+  // =================================== User  Register
   const handleRegister = (email, password, name, history) => {
     setIsLoading(true);
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        setUser(user);
-
-        Swal.fire("Successfully!", "", "success");
+      .then((result) => {
+        setError("");
+        const newUser = { email, displayName: name };
+        setUser(newUser);
+        saveUser(email, name);
+        //--------
+        Swal.fire("Successfully Register!", "Thank you", "success");
+        //----------
+        history.replace("/");
+        //-----------
+        updateProfile(auth.currentUser, {
+          displayName: name,
+        })
+          .then(() => {})
+          .catch((error) => {});
       })
       .catch((error) => {
         setError(error.message);
+        // ..
       })
       .finally(() => setIsLoading(false));
-    // createUserWithEmailAndPassword(auth, email, password)
-    //   .then((result) => {
-    //     const user = result.user;
-    //     setUser(user);
-    //     console.log(user);
-
-    //     Swal.fire("Successfully!", "", "success");
-
-    //     const newUserr = { email, displayName: name };
-    //     setUser(newUserr);
-    //     //////
-    //     updateProfile(auth.currentUser, {
-    //       displayName: name,
-    //     })
-    //       .then(() => {})
-    //       .catch((error) => {
-    //         setError(error.message);
-    //       });
-
-    //     const destination = "/login";
-    //     history.replace(destination);
-    //   })
-    //   .catch((error) => {
-    //     setError(error.message);
-    //   })
-    //   .finally(() => setIsLoading(false));
   };
+
   //=============================================
   // ======================== User  Login
   const handleLogin = (email, password, history, location) => {
@@ -103,7 +92,7 @@ const useFirebase = () => {
       .finally(() => setIsLoading(false));
   };
 
-  // ============================= User  on Auth State Changed
+  // ============================= User observe on Auth State Changed
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -114,6 +103,13 @@ const useFirebase = () => {
       setIsLoading(false);
     });
   }, [auth]);
+  //////
+  //
+  useEffect(() => {
+    fetch(`http://localhost:5000/users/${user.email}`)
+      .then((res) => res.json())
+      .then((data) => setAdmin(data.admin));
+  }, [user.email]);
   // ======================== Sign Out
   const logOut = () => {
     setIsLoading(true);
@@ -129,15 +125,38 @@ const useFirebase = () => {
       })
       .finally(() => setIsLoading(false));
   };
+  // ====================================== Save USer
+  const saveUser = (email, displayName) => {
+    const user = { email, displayName };
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    }).then();
+  };
+  // ====================================== Save USer for google
+  const saveUserGoogle = (email, displayName) => {
+    const user = { email, displayName };
+    fetch("http://localhost:5000/users", {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    }).then();
+  };
   // ======================= return
   return {
     user,
+    admin,
     error,
     logOut,
     isLoading,
     handleGoogleSignIn,
-    handleRegister,
     handleLogin,
+    handleRegister,
   };
 };
 

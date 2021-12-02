@@ -7,7 +7,7 @@ const Information = () => {
     <div className="second container">
       <Col className="open">
         <div>
-          <i class="far fa-clock"></i>
+          <i className="far fa-clock"></i>
         </div>
         <div className="details text-start ms-4">
           <h5 className="mb-1 text-white">Opening Hours</h5>
@@ -18,7 +18,7 @@ const Information = () => {
       </Col>
       <Col className="open location">
         <div>
-          <i class="fas fa-map-marker-alt"></i>
+          <i className="fas fa-map-marker-alt"></i>
         </div>
         <div className="details text-start ms-4">
           <h5 className="mb-1 text-white">Visit our location</h5>
@@ -29,7 +29,7 @@ const Information = () => {
       </Col>
       <Col className="open">
         <div>
-          <i class="fas fa-phone"></i>
+          <i className="fas fa-phone"></i>
         </div>
         <div className="details text-start ms-4">
           <h5 className="mb-1 text-white">Contact us now</h5>

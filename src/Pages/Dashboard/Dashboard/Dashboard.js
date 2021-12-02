@@ -15,24 +15,48 @@ import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { Grid } from "@mui/material";
-import Calender from "../../AppointmentPage/Calender/Calender";
-import Appointments from "../Appointments/Appointments";
+import { Nav } from "react-bootstrap";
+import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
+import DashboardHome from "../DashboardHome/DashboardHome";
+import MakeAdmin from "../MakeAdmin/MakeAdmin";
+import AddDoctor from "../AddDoctor/AddDoctor";
+import useAuth from "../../../Hooks/useAuth";
+import AdminRoute from "../AdminRoute/AdminRoute";
 
 const drawerWidth = 220;
 
 function Dashboard(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const { admin } = useAuth();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
+  let { path, url } = useRouteMatch();
+
   const drawer = (
     <div>
       <Toolbar />
       <Divider />
+      <Nav.Link as={Link} to="/appointment" className="text-black px-3">
+        Appointment
+      </Nav.Link>
+      <Nav.Link as={Link} to={`${url}`} className="text-black px-3">
+        Dashboard
+      </Nav.Link>
+      {admin && (
+        <Nav.Link as={Link} to={`${url}/makeAdmin`} className="text-black px-3">
+          Make Admin
+        </Nav.Link>
+      )}
+      {admin && (
+        <Nav.Link as={Link} to={`${url}/addDoctor`} className="text-black px-3">
+          Add Doctor
+        </Nav.Link>
+      )}
+
       <List>
         {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
           <ListItem button key={text}>
@@ -121,16 +145,18 @@ function Dashboard(props) {
         }}
       >
         <Toolbar />
-        <Typography paragraph>
-          <Grid container spacing={2}>
-            <Grid item xs={6} md={6} lg={4}>
-              <Calender></Calender>
-            </Grid>
-            <Grid sx={{ bgcolor: "text.disabled" }} item xs={6} md={6} lg={8}>
-              <Appointments></Appointments>
-            </Grid>
-          </Grid>
-        </Typography>
+        {/* ==================== */}
+        <Switch>
+          <Route exact path={path}>
+            <DashboardHome></DashboardHome>
+          </Route>
+          <AdminRoute path={`${path}/makeAdmin`}>
+            <MakeAdmin></MakeAdmin>
+          </AdminRoute>
+          <AdminRoute path={`${path}/addDoctor`}>
+            <AddDoctor></AddDoctor>
+          </AdminRoute>
+        </Switch>
       </Box>
     </Box>
   );
