@@ -32,7 +32,7 @@ const BookingModal = ({ bookingModal, handleBookingClose, book, date }) => {
       date: date.toDateString(),
     };
 
-    fetch("http://localhost:5000/appointments", {
+    fetch("https://desolate-harbor-16717.herokuapp.com/appointments", {
       method: "POST",
       headers: {
         "content-type": "application/json",

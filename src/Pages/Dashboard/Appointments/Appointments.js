@@ -6,7 +6,7 @@ const Appointments = ({ date }) => {
   const { user } = useAuth();
   const [appointments, setAppointments] = useState([]);
   useEffect(() => {
-    const uri = `http://localhost:5000/appointments?email=${user.email}&date=${date}`;
+    const uri = `https://desolate-harbor-16717.herokuapp.com/appointments?email=${user.email}&date=${date}`;
     fetch(uri)
       .then((res) => res.json())
       .then((data) => setAppointments(data));
